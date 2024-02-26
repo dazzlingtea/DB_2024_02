@@ -1,0 +1,325 @@
+/*
+ * 검색 CASE 표현식
+ */
+-- 일치하지 않으면 다음 WHEN절로 넘어간다
+-- 급여가 10000 이상이면 상위
+-- 급여가 6000 이상이면 중위
+-- 급여가 1000 이상이면 하위
+
+SELECT employee_id, salary
+   ,CASE
+      WHEN salary >= 10000 THEN '상위'
+      WHEN salary >= 6000 THEN '중위'
+      WHEN salary >= 1000 THEN '하위'
+   END
+FROM employees;
+
+SELECT employee_id, salary
+   ,CASE
+      WHEN salary >= 10000 THEN '상위'
+      WHEN salary >= 6000 THEN '중위'
+      ELSE '하위'
+   END
+FROM employees;
+
+   
+SELECT employee_id, salary
+   ,CASE
+      WHEN salary >= 1000 THEN '하위'
+      WHEN salary >= 6000 THEN '중위'
+      WHEN salary >= 10000 THEN '상위'
+   END
+FROM employees;
+
+-- 단순 CASE 표현식과 NULL
+-- 커미션 비율이 존재하면 Y, 존재하지 않으면 N
+-- =(비교연산자)를 사용하므로 NULL을 판단하지 못한다
+SELECT employee_id, commission_pct
+	,CASE commission_pct WHEN NULL THEN 'N'
+		ELSE 'Y'
+	END AS "커미션 존재 여부"
+FROM employees;
+
+
+-- 검색 CASE 표현식과 NULL
+SELECT employee_id, commission_pct
+	,CASE WHEN commission_pct IS NULL THEN 'N'
+		ELSE 'Y'
+	END AS "커미션 존재 여부"
+FROM employees;
+
+/*
+ * 실습.
+ * 법정 최저급여가 3300일때, 사원들의 평균 급여 구하기
+ * 급여가 3300 미만 사원 : 3300으로 급여 적용
+ * 급여가 3300 이상 사원 : 기존 급여 적용
+ */
+
+-- 급여가 3300 미만이다 -> 이 조건이 거짓이라는 것은 급여가 3300 이상이다
+
+SELECT
+	avg(salary)
+	,avg(CASE WHEN salary < 3300 THEN 3300 ELSE salary END) AS "평균 급여"
+FROM employees;
+
+-- 집계함수와 일반 컬럼은 같이 조회할 수 없다
+-- GROUP BY 기준 컬럼이 아닌 일반컬럼은 조회할 수 없다
+/*
+ * 실습.
+ * 법정 최저급여가 3300일 때 최저급여를 위반하는 사원과
+ * 최저급여를 충족하는 사원의 수, 총 사원의 수 구하기
+ */
+-- else가 없으면 null이 됨
+
+SELECT sum(CASE WHEN salary < 3300 THEN 1 ELSE 0 end) AS "최저급여 위반"
+	,sum(CASE WHEN salary >= 3300 THEN 1 ELSE 0 end) AS "최저급여 충족"
+	,count(CASE WHEN salary >= 3300 THEN salary END)
+	,count(*)
+FROM employees;
+
+/*
+ * 등가 조인
+ */
+
+DROP TABLE test1;
+DROP TABLE test2;
+
+-- test1 테이블 생성
+CREATE TABLE test1(
+   col1 number,
+   col2 varchar2(1000)
+);
+
+-- test2 테이블 생성
+CREATE TABLE test2( 
+   col1 number,
+   col3 varchar2(1000)
+);
+
+
+-- test1, test2 테이블에 데이터 삽입
+BEGIN 
+
+INSERT INTO test1
+VALUES (1, 'A');
+
+INSERT INTO test1
+VALUES (2, 'B');
+
+INSERT INTO test1
+VALUES (3, 'C');
+
+INSERT INTO test2
+VALUES (1, '가');
+
+INSERT INTO test2
+VALUES (5, '나');
+
+INSERT INTO test2
+VALUES (1, '다');
+
+END;
+
+SELECT * FROM test1;
+SELECT * FROM test2;
+
+
+/* test1 테이블           	   test2 테이블
+ * col1      col2              col1      col3
+ * =============               ================
+ * 1        A                  1         가
+ * 2        B                  5         나
+ * 3        C                  1         다
+ */
+
+-- 오라클
+-- test1 col1 값과 test2 col1 값이 같은 행들끼리 연결한다
+SELECT *
+FROM test1, TEST2
+WHERE test1.col1 = test2.col1;
+
+-- 안시
+SELECT *
+FROM test1 INNER JOIN TEST2
+ON test1.col1 = test2.col1;
+
+SELECT test1.col1, test2.col3
+FROM test1 INNER JOIN TEST2 
+ON test1.col1 = test2.col1;
+
+-- 테이블에 별칭을 부여한다
+SELECT t1.col1, t2.col3
+FROM test1 t1 INNER JOIN TEST2 t2 -- 테이블 alias
+ON t1.col1 = t2.col1;
+
+-- test1의 모든 컬럼과 test2 col3 컬럼만 조회한다
+SELECT t1.*, t2.col3
+FROM test1 t1, test2 t2
+WHERE t1.col1 = t2.col1;
+
+/*
+ * 비등가 조인
+ * 
+ */
+-- test1.col1의 값이 test2.col1의 값보다 큰 행들만 연결한다
+-- 오라클
+-- col1 1 vs col1 1 5 1 비교 ->없, 2 -> 1가1다, 3->1가1다
+SELECT *
+FROM test1 t1, test2 t2
+WHERE t1.col1 > t2.col1;
+
+-- 안시
+SELECT *
+FROM test1 t1 INNER JOIN test2 t2
+ON t1.col1 > t2.col1;
+
+-- test.col1의 값이 test2.col1의 값보다 작은 행들만 연결한다
+-- 오라클
+SELECT *
+FROM test1 t1, test2 t2
+WHERE t1.col1 < t2.col1; -- t1 1->2->3 순서
+
+-- 안시
+SELECT *
+FROM test1 t1 INNER JOIN test2 t2
+ON t1.col1 < t2.col1;
+
+/*
+ * 내추럴 조인
+ * 공통된 컬럼을 기준으로 등가조인을 수행한다
+ * 조건절 없이 등가조인
+ */
+-- 내추럴 조인은 공통되는 컬럼에 소속을 밝히지 않는다
+SELECT col1, t1.col2, t2.col3
+FROM test1 t1 NATURAL JOIN test2 t2;
+
+-- 공통 컬럼은 한 번만 조회한다
+SELECT *  
+FROM test1 t1 NATURAL JOIN test2 t2;
+
+-- col1 컬럼은 test1, test2 두 테이블에 있기 때문에
+-- 누구를 지칭하는지 몰라 에러가 발생한다(모호성)
+-- 공통되는 컬럼을 조회할 때는 테이블의 소속을 밝혀야 한다
+-- SQL Error [918] [42000]: ORA-00918: column ambiguously defined
+--SELECT col1
+SELECT t1.col1, col2 -- 하나만 있는 건 테이블명 없어도 됨
+FROM test1 t1, test2 t2
+WHERE t1.col1 = t2.col1;
+
+
+/*
+ * LEFT OUTER JOIN
+ */
+
+-- 오라클
+-- (+) 연산자 반대편에 있는 test1 테이블이 기준 테이블이 된다
+SELECT *
+FROM test1 t1, test2 t2
+WHERE t1.col1 = t2.col1(+);
+
+/*
+ * 1 A : 1 가
+ * 1 A : 1 다
+ * ------ 조인조건을 만족
+ * 2 B : NULL NULL
+ * 3 C : NULL NULL
+ * ------ 조인조건을 만족 X
+ */
+-- 안시
+SELECT *
+FROM test1 t1 LEFT OUTER JOIN test2 t2
+ON t1.col1 = t2.col1;
+
+/*
+ * RIGHT OUTER JOIN
+ */
+-- 오라클
+-- (+) 반대편의 test2 테이블이 기준테이블이 된다
+SELECT *
+FROM test1 t1, test2 t2
+WHERE t1.col1(+) = t2.col1;
+
+-- 안시
+SELECT *
+FROM test1 t1 RIGHT OUTER JOIN test2 t2
+ON t1.col1 = t2.col1;
+
+/*
+ * FULL OUTER JOIN
+ * LEFT + RIGHT OUTER JOIN
+ */
+
+SELECT *
+FROM test1 t1 FULL OUTER JOIN test2 t2
+ON t1.col1 = t2.col1;
+
+
+-- 안시
+-- test1 행의 개수(3개) X test2 행의 개수(3개) = 9개
+SELECT *
+FROM test1 t1 CROSS JOIN test2 t2;
+
+-- 오라클
+SELECT *
+FROM test1 t1, test2 t2;
+
+/*
+ * 등가조인
+ */
+
+-- department_id : 부서번호
+SELECT * FROM employees;
+-- department_id : 부서번호
+SELECT * FROM DEPARTMENTS;
+
+-- 사원들의 부서명은 employees 테이블을 통해서는 알 수 없다
+-- 그러나 employees 테이블과 departments 테이블을 연결한다면 알수 있다
+
+-- 오라클
+-- 사원이 가지고 있는 부서번호와 부서테이블의 부서번호가 같은 행을 연결한다
+SELECT * 
+FROM EMPLOYEES e, DEPARTMENTS d 
+WHERE e.DEPARTMENT_ID  = d.DEPARTMENT_ID;
+
+
+-- 안시
+SELECT *
+FROM EMPLOYEES e INNER JOIN DEPARTMENTS d
+ON e.DEPARTMENT_ID = d.DEPARTMENT_ID;
+
+
+-- 조인 위해 만든 테이블
+DROP TABLE salgrade;
+
+-- 급여 등급 테이블 생성
+CREATE TABLE salgrade(
+   grade NUMBER
+   ,losal NUMBER
+   ,hisal number);
+
+-- 급여 등급 테이블에 데이터 삽입 
+BEGIN
+INSERT INTO salgrade VALUES (1, 500, 3000);
+INSERT INTO salgrade VALUES (2, 3001, 5000);
+INSERT INTO salgrade VALUES (3, 5001, 7000);
+INSERT INTO salgrade VALUES (4, 7001, 9000);
+INSERT INTO salgrade VALUES (5, 9001, 20000);
+END;
+
+/*
+ * 비등가 조인
+ */
+
+SELECT * FROM SALGRADE;
+
+-- 사원들의 급여에 따라 등급을 부여한다
+SELECT e.salary, s.grade
+FROM EMPLOYEES e, SALGRADE s
+WHERE e.SALARY BETWEEN s.losal AND s.hisal;
+
+
+
+
+
+
+

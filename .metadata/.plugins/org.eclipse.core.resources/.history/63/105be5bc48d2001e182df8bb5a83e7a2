@@ -1,0 +1,222 @@
+/*
+ * 실습 및 과제.
+ * 2005년도 입사자의 최고 급여와 최저 급여 구하기
+ * 
+ */
+SELECT MAX(salary), MIN(salary)
+FROM employees
+WHERE hire_date BETWEEN DATE '2005-01-01' AND DATE '2005-12-31';
+
+SELECT to_date('2005-01-01')
+	,to_date('2006-01-01') - 1/24/60/60
+	,to_date('2005-12-31 23:59:59', 'yyyy-mm-dd hh24:mi:ss')
+	,to_date('2006-01-01') - INTERVAL '1' SECOND  --좀더 정확
+FROM dual;
+
+-- extract() : 날짜에서 지정한 요소를 숫자로 가져온다
+--hire_date 연도만 가져올 수 있다면 더 간단
+--extract(날짜요소 from 날짜데이터)
+SELECT EXTRACT(YEAR FROM hire_date)
+	,extract(MONTH FROM hire_date)
+	,extract(DAY FROM hire_date)
+FROM employees;
+
+-- 에러 hire_date 는 date 타입이므로 시간을 가져올 수 없다
+-- extract() 함수는 시간 데이터를 가져올 때는 timestamp 타입만 가능하다 
+--SELECT EXTRACT(HOUR FROM hire_date)
+--	,extract(MINUTE FROM hire_date)
+--	,extract(SECOND FROM hire_date)
+--FROM employees;
+
+SELECT EXTRACT(HOUR FROM to_timestamp(hire_date))
+FROM employees;
+
+-- sysdate : 현재 날짜와 시간을 date 타입으로 가져온다
+-- systimestamp : 현재 날짜와 시간을 timestamp 타입으로 가져온다
+
+SELECT EXTRACT(HOUR FROM systimestamp)
+FROM dual;
+
+
+-- to_char() : 날짜 데이터를 문자 데이터로 형변환한다
+-- yyyy(년), mm(월), dd(일), hh24(24시간), hh12(12시간), am(am,pm 여부), mi(분), ss(초)
+SELECT to_char(sysdate, 'yyyy')
+	,to_char(sysdate, 'yy') --10, 1의 자리
+	,to_char(SYSDATE, 'mm')
+	,to_char(SYSDATE, 'dd')
+FROM dual;
+
+/*
+ * 부서별로 사원들의 평균, 최저, 최고 급여를 조회한다
+ */
+SELECT DISTINCT department_id
+FROM employees;
+
+/*
+ * GROUP BY
+ */
+
+-- avg() 집계함수의 대상이 107명 사원 전체의 그룹이다
+-- 그룹 기준이 아닌 일반 컬럼은 조회할 수 없다
+-- 집계함수는 해당 그룹당 하나의 결과를 가져오면 되기 때문에 다른 컬럼도 사용 가능
+SELECT DEPARTMENT_ID
+	,avg(salary)
+	,max(SALARY)
+	,min(SALARY)
+	,count(*)     -- 모든 행 107
+FROM employees
+GROUP BY DEPARTMENT_ID; 
+
+/*
+ * 집계함수와 GROUP BY
+ * 
+ * 
+ */
+-- 직무별 사원들의 평균, 최고, 최저 급여 구하기
+SELECT job_id
+	,avg(salary)
+	,max(salary)
+	,min(salary)
+FROM employees
+GROUP BY job_id;
+
+-- 입사연도별 사원들의 정보 구하기
+SELECT extract(YEAR FROM hire_date)
+	,count(*)
+	,max(salary)
+	,min(salary)
+	,avg(salary)
+FROM employees
+GROUP BY EXTRACT(YEAR FROM hire_date);
+
+/*
+ * 실습. 부서별 직무의 개수 조회하기
+ * 직무 : job_id
+ * 단, 중복 직무는 개수에 포함하지 않는다
+ */
+SELECT department_id, count(DISTINCT job_id)
+FROM employees 
+GROUP BY department_id;
+
+-- GROUP BY 기준 컬럼 여러개
+-- 순서 : 부서별 그룹 > 해당 부서의 직무별 그룹
+SELECT department_id, job_id
+FROM EMPLOYEES
+GROUP BY DEPARTMENT_ID, JOB_ID 
+ORDER BY 1;
+
+SELECT department_id
+	,job_id
+	,count(*)
+	,max(salary)
+	,min(salary)
+FROM EMPLOYEES
+GROUP BY DEPARTMENT_ID, job_id;
+
+/*
+ * group by 와 where
+ * 그룹 짓기 전에 필터(where)
+ */
+
+-- 매니저 사번이 100인 사원들의 부서번호와 부서별 인원수 구하기
+-- 매니저 사번이 없다면 제일 높은 직급이다 알 수 있음
+SELECT department_id, COUNT(*)
+FROM employees
+WHERE MANAGER_ID = 100
+GROUP BY DEPARTMENT_ID;
+
+
+/*
+ * HAVING
+ */
+-- 최대 급여가 10000 이상인 부서만 최대급여 조회하기
+
+--SELECT department_id, max(salary)
+--FROM employees
+--WHERE max(salary) > = 10000
+--GROUP BY DEPARTMENT_ID ;
+
+SELECT department_id, max(salary)
+FROM employees
+GROUP BY DEPARTMENT_ID
+HAVING max(salary) > = 10000;
+
+-- 전체 사원 중 부서번호가 80인 사원들을 그룹화
+SELECT department_id
+FROM employees 
+WHERE DEPARTMENT_ID = 80
+GROUP BY DEPARTMENT_ID ;
+
+-- 전체 사원을 그룹화 하고 부서번호가 80인 그룹만 조회
+SELECT department_id
+FROM employees 
+GROUP BY DEPARTMENT_ID
+HAVING DEPARTMENT_ID = 80;
+
+-- GROUP BY 기준 컬럼이 아닌 일반 컬럼은 HAVING에서 사용이 불가하다
+--SELECT department_id
+--FROM employees 
+--GROUP BY DEPARTMENT_ID
+--HAVING salary >= 10000;
+
+/*
+ * 실습.
+ * 부서별 2006년 입사자 수와 평균 급여 구하기
+ */
+SELECT department_id
+	,count(*)
+	,avg(salary)
+FROM employees 
+WHERE extract(YEAR FROM hire_date) = 2006
+GROUP BY department_id;
+
+/*
+ * 실습.
+ * 사원의 수가 5명 이상인 부서의 최저, 최고급여와 사원의 수 구하기
+ */
+SELECT department_id 
+	,count(*) 
+	,min(salary)
+	,max(salary)
+FROM employees
+GROUP BY department_id
+HAVING COUNT(*) >= 5;
+
+/*
+ * 실습.
+ * 직무별 커미션 비율이 존재하는 사원의 수 구하기
+ */
+SELECT job_id, COUNT(*)
+FROM employees
+WHERE commission_pct IS NOT NULL
+GROUP BY job_id;
+
+/*
+ * 단순 CASE 표현식
+ */
+-- 부서번호가 60번이면 'IT부서', 부서번호가 80번이면 '영업부서'
+-- department_id = 60, department_id = 80 
+SELECT employee_id
+	,CASE department_id 
+		WHEN 60 THEN 'IT부서'
+		WHEN 80 THEN '영업부서'
+		ELSE '미정'
+	END AS 부서
+FROM employees;				
+
+-- 부서번호가 60번이면 급여 + 1000, 부서번호가 80번이면 급여 + 500 한 금액을
+-- 변동 급여로 사용한다. 두 번호에 해당하지 않으면 기존 급여로 사용한다
+
+SELECT employee_id
+	,CASE departement_id
+		WHEN 60 THEN salary + 1000
+		WHEN 80 THEN salary + 500
+		ELSE salary
+	END AS "변동 급여"
+FROM employees;
+
+
+
+
+
+

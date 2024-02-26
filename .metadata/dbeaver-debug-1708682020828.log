@@ -1,0 +1,125 @@
+2024-02-21 22:00:23.489 - DBeaver 23.3.0.202312031432 is starting
+2024-02-21 22:00:23.490 - OS: Windows 10 10.0 (amd64)
+2024-02-21 22:00:23.491 - Java version: 17.0.6 by Eclipse Adoptium (64bit)
+2024-02-21 22:00:23.491 - Install path: 'D:\1900_db_snr\dbeaver'
+2024-02-21 22:00:23.491 - Instance path: 'file:/D:/1900_db_snr/workspace/'
+2024-02-21 22:00:23.491 - Memory available 64Mb/1024Mb
+2024-02-21 22:00:23.515 - Create display
+> Start Eclipse IDE UI [org.eclipse.ui.ide 3.21.100.v20230825-1346]
+2024-02-21 22:00:23.729 - Initializing DBeaver 23.3.0
+2024-02-21 22:00:23.736 - Host plugin: org.jkiss.dbeaver.ui.app.standalone 23.3.0.202312031432
+2024-02-21 22:00:23.736 - Initialize desktop platform...
+2024-02-21 22:00:23.951 - BounceCastle bundle found. Use JCE provider BC
+> Start Core File Systems [org.eclipse.core.filesystem 1.10.100.v20230717-1727]
+> Start Core Resource Management [org.eclipse.core.resources 3.19.100.v20230814-1312]
+> Start 팀 지원 핵심 [org.eclipse.team.core 3.10.100.v20230726-0617]
+> Start DBeaver UI Navigator [org.jkiss.dbeaver.ui.navigator 1.0.120.202312031432]
+2024-02-21 22:00:24.309 - 
+2024-02-21 22:00:24.309 - 	Refreshing workspace.
+2024-02-21 22:00:24.310 - Refreshing workspace contents
+2024-02-21 22:00:24.438 - Initialize base platform...
+2024-02-21 22:00:24.489 - Platform initialized (753ms)
+2024-02-21 22:00:24.564 - Starting instance server at http://localhost:2197
+2024-02-21 22:00:24.605 - Run workbench
+> Start DBeaver UI [org.jkiss.dbeaver.ui 5.1.135.202312031432]
+> Start Eclipse e4 작업영역 SWT [org.eclipse.e4.ui.workbench.swt 0.17.100.v20230727-0604]
+> Start Eclipse Application Services [org.eclipse.e4.core.services 2.4.100.v20230708-0809]
+> Start Eclipse UI Application Services [org.eclipse.e4.ui.services 1.6.100.v20230630-1554]
+> Start Eclipse e4 Progress View [org.eclipse.e4.ui.progress 0.4.100.v20230727-0604]
+> Start Eclipse Bindings Support [org.eclipse.e4.ui.bindings 0.14.100.v20230630-1554]
+> Start Eclipse e4 core commands [org.eclipse.e4.core.commands 1.1.100.v20230630-1554]
+> Start EMF XML/XMI Persistence [org.eclipse.emf.ecore.xmi 2.35.0.v20230801-1141]
+> Start Eclipse CSS SWT Theme Support [org.eclipse.e4.ui.css.swt.theme 0.14.100.v20230727-0604]
+> Start Eclipse e4 작업영역 기능 추가 [org.eclipse.e4.ui.workbench.addons.swt 1.5.100.v20230727-0604]
+> Start Eclipse e4 작업영역 SWT 렌더러 [org.eclipse.e4.ui.workbench.renderers.swt 0.16.100.v20230801-1255]
+> Start Eclipse Dependency Injection Extensions [org.eclipse.e4.core.di.extensions 0.18.0.v20230429-1914]
+> Start Eclipse CSS SWT Support [org.eclipse.e4.ui.css.swt 0.15.100.v20230727-0604]
+> Start jna [com.sun.jna 5.13.0.v20230812-1000]
+Warning: NLS unused message: BlockedJobsDialog_UserInterfaceTreeElement in: org.eclipse.ui.internal.progress.messages
+2024-02-21 22:00:27.038 - Configure workbench window
+> Start DBeaver SQL Model [org.jkiss.dbeaver.model.sql 1.0.110.202312031432]
+2024-02-21 22:00:27.331 - Total database drivers: 108 (108)
+> Start 도움말 시스템 코어 [org.eclipse.help 3.10.100.v20230726-0617]
+2024-02-21 22:00:27.537 - Create actions
+2024-02-21 22:00:27.559 - Disable Eclipse action set 'org.eclipse.ui.edit.text.actionSet.annotationNavigation'
+2024-02-21 22:00:27.560 - Disable Eclipse action set 'org.eclipse.ui.WorkingSetActionSet'
+2024-02-21 22:00:27.560 - Disable Eclipse action set 'org.eclipse.ui.actionSet.openFiles'
+2024-02-21 22:00:28.894 - Initialize workbench window
+2024-02-21 22:00:28.902 - Finish initialization
+> Start DBeaver UI Editors - Data [org.jkiss.dbeaver.ui.editors.data 1.0.120.202312031432]
+> Start 인터넷 연결 관리 사용자 인터페이스 [org.eclipse.ui.net 1.5.100.v20230726-0617]
+> Start Internet Connection Management [org.eclipse.core.net 1.5.100.v20230630-1232]
+Warning: NLS unused message: actions_navigator__objects in: org.jkiss.dbeaver.ui.editors.sql.internal.SQLEditorMessages
+> Start DBeaver UI Editors - SQL [org.jkiss.dbeaver.ui.editors.sql 1.0.120.202312031432]
+> Start GEF Classic Draw2d [org.eclipse.draw2d 3.14.0.202308311129]
+> Start GEF Classic GEF (MVC) [org.eclipse.gef 3.15.0.202308311129]
+> Start DBeaver ERD UI [org.jkiss.dbeaver.erd.ui 3.0.80.202312031432]
+> Start DBeaver ERD Model [org.jkiss.dbeaver.erd.model 1.0.80.202312031432]
+> Start 기본 문서 편집기 [org.eclipse.ui.editors 3.17.0.v20230821-1342]
+> Start 텍스트 편집기 프레임워크 [org.eclipse.ui.workbench.texteditor 3.17.100.v20230821-0745]
+> Start DBeaver Sample Database [org.jkiss.dbeaver.ext.sample.database 1.0.157.202312031432]
+> Start DBeaver Tip of the day [org.jkiss.dbeaver.ext.ui.tipoftheday 1.0.126.202312031432]
+2024-02-21 22:00:32.368 - Open [https://dbeaver.io/product/version.xml]
+> Start DBeaver UI Editors - Connections [org.jkiss.dbeaver.ui.editors.connection 1.0.111.202312031432]
+Warning: NLS unused message: InputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
+Warning: NLS unused message: OutputStreamMonitor_label in: org.eclipse.debug.internal.core.DebugCoreMessages
+> Start 디버그 핵심 [org.eclipse.debug.core 3.21.100.v20230731-1425]
+> Start JSch 핵심 [org.eclipse.jsch.core 1.5.100.v20230726-0617]
+> Start DBeaver JDBC Model [org.jkiss.dbeaver.model.jdbc 1.0.13.202312031432]
+> Start DBeaver Oracle Model [org.jkiss.dbeaver.ext.oracle 2.1.205.202312031432]
+> Start Data Transfer UI [org.jkiss.dbeaver.data.transfer.ui 1.0.104.202312031432]
+> Start DBeaver Oracle UI [org.jkiss.dbeaver.ext.oracle.ui 1.0.107.202312031432]
+2024-02-21 22:01:46.199 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+> Start DBeaver Tasks - Native Tools UI [org.jkiss.dbeaver.tasks.native.ui 1.0.98.202312031432]
+> Start DBeaver Tasks - General UI [org.jkiss.dbeaver.tasks.ui 1.0.98.202312031432]
+> Start DBeaver SQL Terminal [org.jkiss.dbeaver.ui.editors.sql.terminal 1.0.96.202312031432]
+> Start 핵심 비교 지원 [org.eclipse.compare.core 3.8.100.v20230726-0617]
+> Start 콘솔 [org.eclipse.ui.console 3.13.0.v20230726-0617]
+2024-02-21 22:01:57.231 - Connect with 'localhost' (oracle_thin-18dcb80d7f2-410351c826af9dac)
+2024-02-21 22:01:57.283 - Execution context opened (localhost; Main; 0)
+2024-02-21 22:01:57.466 - Open [https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/12.2.0.1/ojdbc8-12.2.0.1.pom]
+2024-02-21 22:01:58.173 - Open [https://repo1.maven.org/maven2/com/oracle/database/jdbc/ucp/12.2.0.1/ucp-12.2.0.1.pom]
+2024-02-21 22:01:58.339 - Open [https://repo1.maven.org/maven2/com/oracle/database/security/oraclepki/12.2.0.1/oraclepki-12.2.0.1.pom]
+2024-02-21 22:01:58.515 - Open [https://repo1.maven.org/maven2/com/oracle/database/security/osdt_cert/12.2.0.1/osdt_cert-12.2.0.1.pom]
+2024-02-21 22:01:58.703 - Open [https://repo1.maven.org/maven2/com/oracle/database/security/osdt_core/12.2.0.1/osdt_core-12.2.0.1.pom]
+2024-02-21 22:01:58.870 - Open [https://repo1.maven.org/maven2/com/oracle/database/ha/simplefan/12.2.0.1/simplefan-12.2.0.1.pom]
+2024-02-21 22:01:59.056 - Open [https://repo1.maven.org/maven2/com/oracle/database/ha/ons/12.2.0.1/ons-12.2.0.1.pom]
+2024-02-21 22:01:59.230 - Open [https://repo1.maven.org/maven2/com/oracle/database/nls/orai18n/12.2.0.1/orai18n-12.2.0.1.pom]
+2024-02-21 22:01:59.403 - Open [https://repo1.maven.org/maven2/com/oracle/database/xml/xdb6/12.2.0.1/xdb6-12.2.0.1.pom]
+2024-02-21 22:01:59.577 - Open [https://repo1.maven.org/maven2/com/oracle/database/xml/xmlparserv2/12.2.0.1/xmlparserv2-12.2.0.1.pom]
+2024-02-21 22:02:04.620 - Open [https://repo1.maven.org/maven2/com/oracle/database/jdbc/ojdbc8/12.2.0.1/ojdbc8-12.2.0.1.jar]
+2024-02-21 22:02:05.980 - Open [https://repo1.maven.org/maven2/com/oracle/database/jdbc/ucp/12.2.0.1/ucp-12.2.0.1.jar]
+2024-02-21 22:02:06.219 - Open [https://repo1.maven.org/maven2/com/oracle/database/security/oraclepki/12.2.0.1/oraclepki-12.2.0.1.jar]
+2024-02-21 22:02:06.398 - Open [https://repo1.maven.org/maven2/com/oracle/database/security/osdt_cert/12.2.0.1/osdt_cert-12.2.0.1.jar]
+2024-02-21 22:02:06.593 - Open [https://repo1.maven.org/maven2/com/oracle/database/security/osdt_core/12.2.0.1/osdt_core-12.2.0.1.jar]
+2024-02-21 22:02:06.766 - Open [https://repo1.maven.org/maven2/com/oracle/database/ha/simplefan/12.2.0.1/simplefan-12.2.0.1.jar]
+2024-02-21 22:02:06.944 - Open [https://repo1.maven.org/maven2/com/oracle/database/ha/ons/12.2.0.1/ons-12.2.0.1.jar]
+2024-02-21 22:02:07.123 - Open [https://repo1.maven.org/maven2/com/oracle/database/nls/orai18n/12.2.0.1/orai18n-12.2.0.1.jar]
+2024-02-21 22:02:07.667 - Open [https://repo1.maven.org/maven2/com/oracle/database/xml/xdb6/12.2.0.1/xdb6-12.2.0.1.jar]
+2024-02-21 22:02:07.871 - Open [https://repo1.maven.org/maven2/com/oracle/database/xml/xmlparserv2/12.2.0.1/xmlparserv2-12.2.0.1.jar]
+2024-02-21 22:02:08.770 - Execution context opened (localhost; Metadata; 1)
+2024-02-21 22:02:08.869 - Connected (oracle_thin-18dcb80d7f2-410351c826af9dac, Oracle JDBC driver [12.2.0.1.0])
+2024-02-21 22:02:08.888 - Execution context opened (localhost; SQLEditor <day04.sql>; 2)
+> Start DBeaver Data Transfer [org.jkiss.dbeaver.data.transfer 2.0.104.202312031432]
+2024-02-21 22:12:29.962 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+2024-02-21 22:12:32.364 - Connect with 'jdbc:oracle:thin:@//localhost:1521/XE' (oracle_thin-18dcbcbdf43-5ea89eea8afa9b6e)
+2024-02-21 22:12:32.368 - Execution context opened (jdbc:oracle:thin:@//localhost:1521/XE; Main; 3)
+2024-02-21 22:12:32.536 - Connected (oracle_thin-18dcbcbdf43-5ea89eea8afa9b6e, Oracle JDBC driver [12.2.0.1.0])
+2024-02-21 22:12:32.591 - Execution context closed (jdbc:oracle:thin:@//localhost:1521/XE, 3)
+2024-02-21 22:12:32.591 - Disconnected (oracle_thin-18dcbcbdf43-5ea89eea8afa9b6e)
+2024-02-21 22:13:03.056 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+2024-02-21 22:13:04.928 - Connect with 'jdbc:oracle:thin:@//localhost:1521/XE' (oracle_thin-18dcbcc5e88-28472fa0e70ee6eb)
+2024-02-21 22:13:04.931 - Execution context opened (jdbc:oracle:thin:@//localhost:1521/XE; Main; 4)
+2024-02-21 22:13:04.977 - Connected (oracle_thin-18dcbcc5e88-28472fa0e70ee6eb, Oracle JDBC driver [12.2.0.1.0])
+2024-02-21 22:13:05.030 - Execution context closed (jdbc:oracle:thin:@//localhost:1521/XE, 4)
+2024-02-21 22:13:05.030 - Disconnected (oracle_thin-18dcbcc5e88-28472fa0e70ee6eb)
+2024-02-21 22:13:14.407 - Service 'org.jkiss.dbeaver.runtime.ui.UIServiceSecurity' not found
+2024-02-21 22:13:15.856 - Connect with 'jdbc:oracle:thin:@//localhost:1521/XE' (oracle_thin-18dcbcc8938-7f3447dfcb6f564e)
+2024-02-21 22:13:15.856 - Execution context opened (jdbc:oracle:thin:@//localhost:1521/XE; Main; 5)
+2024-02-21 22:13:15.903 - Connected (oracle_thin-18dcbcc8938-7f3447dfcb6f564e, Oracle JDBC driver [12.2.0.1.0])
+2024-02-21 22:13:15.954 - Execution context closed (jdbc:oracle:thin:@//localhost:1521/XE, 5)
+2024-02-21 22:13:15.954 - Disconnected (oracle_thin-18dcbcc8938-7f3447dfcb6f564e)
+2024-02-21 23:21:31.345 - Execution context closed (localhost, 2)
+2024-02-21 23:21:32.487 - DBeaver is stopping
+2024-02-21 23:21:32.491 - Stop instance server
+2024-02-21 23:21:33.490 - DBeaver shutdown completed
