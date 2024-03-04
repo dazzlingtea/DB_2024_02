@@ -1,0 +1,8 @@
+-- rownum : 오라클에서 부여하는 가상의 순번
+
+SELECT rownum, employee_id
+FROM employees;
+
+SELECT rownum, employee_id
+FROM employees
+WHERE rownum <= 5;

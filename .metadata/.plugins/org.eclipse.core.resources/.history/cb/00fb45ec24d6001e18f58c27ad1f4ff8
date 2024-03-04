@@ -1,0 +1,72 @@
+/* 과제
+ * LEFT OUTER JOIN
+ * employees, departments 테이블을 OUTER JOIN
+ * employees 테이블을 기준 테이블로 사용한다
+ * 조인 조건 : 부서번호가 같은 컬럼끼리 연결한다
+ */
+-- 오라클
+SELECT *
+FROM employees e, departments d
+WHERE e.department_id = d.department_id(+);
+
+-- 안시
+SELECT *
+FROM employees e LEFT OUTER JOIN departments d
+-- FROM departments d LEFT OUTER JOIN employees e
+ON e.department_id = d.department_id;
+
+/*
+ * RIGHT OUTER JOIN
+ * employees, departments 테이블을 OUTER JOIN
+ * departments 테이블을 기준 테이블로 사용한다
+ * 조인 조건 : 부서번호가 같은 컬럼끼리 연결한다
+ */
+-- 오라클
+SELECT *
+FROM employees e, departments d
+WHERE e.department_id(+) = d.department_id;
+
+-- 안시
+SELECT *
+FROM employees e RIGHT OUTER JOIN departments d
+ON e.department_id = d.department_id;
+
+
+/*
+ * 여러 개의 테이블 조인
+ * N개의 테이블 조인 -> N-1개의 조인 조건이 필요하다
+ */
+
+-- employees(사원), department(부서), locations(지역)
+-- 사원의 근무 도시를 조회하기
+-- 오라클
+SELECT e.employee_id, l.city
+FROM employees e, departments d, locations l
+WHERE e.department_id = d.department_id
+AND d.location_id = l.location_id;
+
+-- 안시
+-- employees <> departments 테이블 연결 -> 하나의 테이블
+-- 위의 테이블과 나머지 테이블(locations) 연결
+SELECT e.employee_id, l.city
+FROM employees e INNER JOIN departments d 
+ON e.department_id = d.department_id INNER JOIN locations l
+ON d.location_id = l.location_id;
+-- where, group by, order by는 이 뒤에 똑같이 하면 됨
+
+-- 도시별 부서번호와 해당 부서에 속하는 사원의 수 조회
+-- 집계함수랑 일반컬럼 같이 x(그룹기준은 가능)
+SELECT l.city, d.department_id, count(*)  
+FROM employees e, departments d, locations l
+WHERE e.department_id = d.department_id
+AND d.location_id = l.location_id
+GROUP BY l.city, d.department_id
+ORDER BY 1;
+
+-- 모든 사원들의 소속된 부서명을 조회하기
+
+
+
+
+
+

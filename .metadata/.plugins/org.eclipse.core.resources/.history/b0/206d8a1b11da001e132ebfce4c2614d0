@@ -1,0 +1,18 @@
+-- rownum : 오라클에서 부여하는 가상의 순번
+
+SELECT rownum, employee_id
+FROM employees;
+
+SELECT rownum, employee_id
+FROM employees
+WHERE rownum <= 5;
+
+SELECT rownum, employee_id, DEPARTMENT_ID 
+FROM employees
+WHERE DEPARTMENT_ID = 80 AND rownum <= 5;
+
+-- 급여 내림차순으로 정렬하고 급여 순위가 1~5위인 사원만 조회하기
+SELECT rownum, employee_id, salary
+FROM EMPLOYEES
+WHERE rownum <= 5
+ORDER BY SALARY DESC;
